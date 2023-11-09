@@ -1,0 +1,156 @@
+{
+  "_version": "1.37.0",
+  "sap.app": {
+    "id": "com.lb.flp.tracker.zappovp",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:ovp",
+      "version": "1.11.3",
+      "toolsId": "54f7114d-7a7f-4b59-a22d-53cded6bfd71"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/sap/opu/odata/sap/ZFLP_C_APPVIEW_CDS/",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "ZFLP_C_APPVIEW_CDS_VAN",
+            "annotation"
+          ],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZFLP_C_APPVIEW_CDS_VAN": {
+        "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZFLP_C_APPVIEW_CDS_VAN',Version='0001')/$value/",
+        "type": "ODataAnnotation",
+        "settings": {
+          "localUri": "localService/ZFLP_C_APPVIEW_CDS_VAN.xml"
+        }
+      },
+      "annotation": {
+        "type": "ODataAnnotation",
+        "uri": "annotations/annotation.xml",
+        "settings": {
+          "localUri": "annotations/annotation.xml"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.96.24",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.ushell": {},
+        "sap.f": {},
+        "sap.ui.comp": {},
+        "sap.ui.generic.app": {},
+        "sap.suite.ui.generic.template": {},
+        "sap.ovp": {},
+        "sap.ui.rta": {},
+        "sap.ui.layout": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "com.lb.flp.tracker.zappovp.i18n.i18n"
+        }
+      },
+      "ZFLP_C_APPVIEW_CDS": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "defaultBindingMode": "TwoWay",
+          "defaultCountMode": "Inline",
+          "refreshAfterChange": false,
+          "metadataUrlParams": {
+            "sap-value-list": "none"
+          }
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "config": {},
+      "routes": [],
+      "targets": {}
+    }
+  },
+  "sap.ovp": {
+		"globalFilterModel": "ZFLP_C_APPVIEW_CDS",
+		"globalFilterEntityType": "ZFLP_C_APPVIEWType",
+		"containerLayout": "resizable",
+		"enableLiveFilter": true,
+		"considerAnalyticalParameters": false,
+		"cards": {
+			"card01": {
+				"model": "ZFLP_C_APPVIEW_CDS",
+				"template": "sap.ovp.cards.table",
+				"settings": {
+					"title": "{{card01_title}}",
+					"subTitle": "{{card01_subTitle}}",
+					"entitySet": "ZFLP_C_APPVIEW",
+					"sortBy": "total_hits",
+					"sortOrder": "descending",
+					"addODataSelect": false,
+					"annotationPath": "com.sap.vocabularies.UI.v1.LineItem#F1"
+				}
+			},
+			"card02": {
+				"model": "ZFLP_C_APPVIEW_CDS",
+				"template": "sap.ovp.cards.charts.analytical",
+				"settings": {
+					"title": "{{card02_title}}",
+					"subTitle": "{{card02_subTitle}}",
+					"entitySet": "ZFLP_C_APPVIEW",
+					"chartAnnotationPath": "com.sap.vocabularies.UI.v1.Chart#F1",
+					"dataPointAnnotationPath": "com.sap.vocabularies.UI.v1.DataPoint#F1",
+					"identificationAnnotationPath": "com.sap.vocabularies.UI.v1.Identification#F1",
+					"navigation": "dataPointNav"
+				}
+			}
+		}
+	},
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "analytical"
+  }
+}
